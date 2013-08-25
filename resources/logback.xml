@@ -18,11 +18,14 @@
   </appender>
 
   <!-- debug for soundstorm -->
-  <logger name="soundstorm" level="INFO" />
-  
+  <logger name="soundstorm" level="debug" />
+
+  <!-- libs -->
+  <logger name="org.eclipse.jetty" level="info" />
+
   <root level="DEBUG">
     <appender-ref ref="STDOUT" />
-    <appender-ref ref="FILE" />    
+    <appender-ref ref="FILE" />
   </root>
 
 </configuration>

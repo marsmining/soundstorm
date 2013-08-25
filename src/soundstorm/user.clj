@@ -12,15 +12,16 @@
 
 (comment
 
-  (def demo-users [{:username "root"
+  (def demo-users [{:username "root@test.de"
                     :password (creds/hash-bcrypt "er44")
                     :roles #{::admin}}
-                   {:username "foo"
+                   {:username "foo@test.de"
                     :password (creds/hash-bcrypt "er55")
                     :roles #{::user}}])
 
   (map store demo-users)
 
-  (fetch "foo")
+  (fetch "foo@test.de")
 
+  (isa? :soundstorm.user/user ::user)
   )
