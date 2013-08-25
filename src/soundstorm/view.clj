@@ -14,8 +14,11 @@
   (row 12 [:div.panel.panel-default
            [:div.panel-body
             (if-let [identity (friend/identity req)]
-              (apply str "Logged in, with these roles: "
-                     (-> identity friend/current-authentication :roles))
+              (let [id-str (apply str "Logged in, with these roles: "
+                                  (-> identity friend/current-authentication :roles))]
+                [:div
+                 [:p id-str]
+                 [:a {:href "logout"} "Logout"]])
               "anonymous user")]]))
 
 (defn base-page [req body]

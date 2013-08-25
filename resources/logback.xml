@@ -22,7 +22,10 @@
 
   <!-- libs -->
   <logger name="org.eclipse.jetty" level="info" />
-
+  <logger name="org.apache" level="debug" />
+  <logger name="org.apache.http.headers" level="info" />
+  <logger name="org.apache.http.wire" level="info" />
+  
   <root level="DEBUG">
     <appender-ref ref="STDOUT" />
     <appender-ref ref="FILE" />

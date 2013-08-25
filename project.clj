@@ -12,6 +12,7 @@
                  [cheshire "5.2.0"]
                  [compojure "1.1.5"]
                  [hiccup "1.0.0"]
-                 [com.taoensso/carmine "2.2.0"]]
+                 [com.taoensso/carmine "2.2.0"]
+                 [org.slf4j/jcl-over-slf4j "1.7.5"]]
   :plugins [[lein-ring "0.7.1"]]
   :ring {:handler soundstorm.core/secured-app})
