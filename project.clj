@@ -11,7 +11,8 @@
                  [clj-http "0.7.6"]
                  [cheshire "5.2.0"]
                  [compojure "1.1.5"]
-                 [hiccup "1.0.0"]]
+                 [hiccup "1.0.0"]
+                 [com.taoensso/carmine "2.2.0"]]
   :profiles {:dev {:dependencies [[ring "1.2.0"]]}}
   :plugins [[lein-ring "0.7.1"]]
   :ring {:handler soundstorm.core/app})
