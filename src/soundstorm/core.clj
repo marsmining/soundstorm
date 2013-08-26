@@ -20,7 +20,7 @@
       clojure.walk/keywordize-keys
       :access_token))
 
-(def config-auth {:roles #{:soundstorm.user/user}})
+(def config-auth {:roles #{::user/user}})
 
 (def client-config
   {:client-id "b35a89f510267e48d1ec0169e4d7686e"
@@ -68,11 +68,11 @@
          :login-uri "/login"
          :default-landing-uri "/"
          :credential-fn (partial creds/bcrypt-credential-fn user/fetch)
-         :workflows [(workflows/interactive-form)
-                     (oauth2/workflow
+         :workflows [(oauth2/workflow
                       {:client-config client-config
                        :uri-config uri-config
                        :access-token-parsefn access-token-parsefn
-                       :config-auth config-auth})]}))
+                       :config-auth config-auth})
+                     (workflows/interactive-form)]}))
       (log-requests)
       (wrap-base-url)))
