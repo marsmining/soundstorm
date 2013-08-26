@@ -8,6 +8,8 @@
                  [com.cemerick/friend "0.1.5"]
                  [friend-oauth2 "0.0.4"]
                  [ring "1.2.0"]
+                 [ring-server "0.2.8"]
+                 [ring/ring-jetty-adapter "1.1.8"]
                  [clj-http "0.7.6"]
                  [cheshire "5.2.0"]
                  [compojure "1.1.5"]

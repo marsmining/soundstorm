@@ -9,16 +9,25 @@
             [cemerick.friend :as friend]
             [cemerick.friend.workflows :as workflows]
             [cemerick.friend.credentials :as creds]
-            [friend-oauth2.workflow :as oauth2]))
+            [friend-oauth2.workflow :as oauth2]
+            [cheshire.core :as json]))
+
+(defn home [req]
+  (log/info "identity:" (friend/identity req))
+  (view/index-page req))
+
+;; soundcloud oauth2 config
+;;
 
 (defn access-token-parsefn
   [response]
   (log/info "attempting token parse:" response)
-  (-> response
-      :body
-      ring.util.codec/form-decode
-      clojure.walk/keywordize-keys
-      :access_token))
+  (let [token (-> response
+                  :body
+                  (json/parse-string true)
+                  :access_token)]
+    (log/info "token:" token)
+    token))
 
 (def config-auth {:roles #{::user/user}})
 
@@ -42,8 +51,11 @@
                               :redirect_uri (oauth2/format-config-uri client-config)
                               :code ""}}})
 
+;; ring / compojure / friend config
+;;
+
 (defroutes main-routes
-  (GET "/" req (view/index-page req))
+  (GET "/" req (home req))
   (GET "/login" req (view/login-page req))
   (GET "/status" req
        (view/status-page req))
