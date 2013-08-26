@@ -48,17 +48,15 @@
   (GET "/status" req
        (view/status-page req))
   (GET "/tracks" req
-       (friend/authorize
-        #{:soundstorm.user/user :soundstorm.user/admin}
-        (view/tracks-page req)))
+       (friend/authorize #{::user/user} (view/tracks-page req)))
   (friend/logout (ANY "/logout" req (ring.util.response/redirect "/")))
   (route/resources "/")
   (route/not-found "Page not found"))
 
 (defn log-requests [handler]
-  (fn [request]
-    (log/info (:request-method request) (:uri request) (:params request))
-    (handler request)))
+  (fn [req]
+    (log/info (:request-method req) (:uri req) (:params req))
+    (handler req)))
 
 (def secured-app
   (-> (handler/site
@@ -74,5 +72,5 @@
                        :access-token-parsefn access-token-parsefn
                        :config-auth config-auth})
                      (workflows/interactive-form)]}))
-      (log-requests)
-      (wrap-base-url)))
+      (wrap-base-url)
+      (log-requests)))
