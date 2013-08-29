@@ -23,5 +23,15 @@
          (clojure.string/replace sc-token-representation representation)
          (clojure.string/replace sc-token-oauth-token token))))
 
-(defn get-resource [resource token]
-  (:body (http/get (build-uri resource token) {:as :json})))
+(defonce conn-mgr
+  (clj-http.conn-mgr/make-reusable-conn-manager
+   {:timeout 2 :threads 3}))
+
+(defn sget [resource token]
+  (http/get
+   (build-uri resource token)
+   {:as :json
+    :connection-manager conn-mgr}))
+
+(defn get-resources [resources token]
+  (reduce #(assoc %1 %2 (:body (sget %2 token))) {} resources))
