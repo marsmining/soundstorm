@@ -66,18 +66,28 @@
 (defroutes main-routes
   (GET "/" req (home req))
   (GET "/login" req (view/login-page req))
-  (GET "/status" req
-       (view/status-page req))
-  (GET "/tracks" req
-       (friend/authorize #{::user/user} (view/tracks-page req)))
   (friend/logout (ANY "/logout" req (ring.util.response/redirect "/")))
   (route/resources "/")
   (route/not-found "Page not found"))
 
+(defn is-media? [str]
+  (or (.endsWith str ".js")
+      (.endsWith str ".css")
+      (.endsWith str ".ico")
+      (.endsWith str ".png")
+      (.endsWith str ".woff")
+      (.endsWith str ".ttf")))
+
 (defn log-requests [handler]
   (fn [req]
-    (log/info (:request-method req) (:uri req) (:params req))
-    (handler req)))
+    (if (is-media? (:uri req))
+      (handler req)
+      (do
+       (log/info (:request-method req) (:uri req) (:query-string req))
+       (let [start (System/currentTimeMillis)
+             rez (handler req)]
+         (log/info "elapsed time:" (- (System/currentTimeMillis) start))
+         rez)))))
 
 (def secured-app
   (-> (handler/site
