@@ -10,7 +10,7 @@
   
   )
 
-(def jetty (atom nil))
+(defonce jetty (atom nil))
 
 (defn start []
   (reset! jetty (rs/serve #'core/secured-app {:port 3000 :browser-uri "/" :auto-reload? false})))

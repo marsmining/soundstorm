@@ -1,6 +1,7 @@
 (ns soundstorm.core
   (:require [soundstorm.view :as view]
             [soundstorm.user :as user]
+            [soundstorm.soundcloud :as sc]
             [clojure.tools.logging :as log]
             [compojure.handler :as handler]
             [compojure.route :as route]
@@ -10,11 +11,19 @@
             [cemerick.friend.workflows :as workflows]
             [cemerick.friend.credentials :as creds]
             [friend-oauth2.workflow :as oauth2]
-            [cheshire.core :as json]))
+            [cheshire.core :as json]
+            [clj-http.client :as http]))
+
+;; controllers
+;;
 
 (defn home [req]
-  (log/info "identity:" (friend/identity req))
-  (view/index-page req))
+  (if-let [token (:current (friend/identity req))]
+    (let [me (sc/get-resource :me token)]
+      (log/info "identity:" token)
+      (log/info "me:" me)
+      (view/main-page req me))
+    (view/index-page req)))
 
 ;; soundcloud oauth2 config
 ;;

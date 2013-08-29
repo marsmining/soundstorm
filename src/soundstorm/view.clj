@@ -8,23 +8,22 @@
 (declare whois)
 (declare row)
 
-(defn base-page [req body]
-  (hp/html5
-   {:lang "en"}
-   [:head
-    [:title "soundstorm"]
-    [:meta {:charset "utf-8"}]
-    [:link {:rel "shortcut icon" :type "image/x-icon" :href "/img/favicon.ico"}]
-    (hp/include-css "/css/lib/bootstrap.min.css")
-    (hp/include-css "/css/base.css")]
-   [:body
-    [:div.container
-     body
-     (row 12 (whois req))]
-    (hp/include-js "/js/lib/jquery.js")
-    (hp/include-js "/js/lib/underscore.js")
-    (hp/include-js "/js/lib/bootstrap.js")
-    (hp/include-js "/js/global.js")]))
+(defmacro base-page [req & body]
+  `(hp/html5
+    {:lang "en"}
+    [:head
+     [:title "soundstorm"]
+     [:meta {:charset "utf-8"}]
+     [:link {:rel "shortcut icon" :type "image/x-icon" :href "/img/favicon.ico"}]
+     (hp/include-css "/css/lib/bootstrap.min.css")
+     (hp/include-css "/css/base.css")]
+    [:body
+     [:div.container
+      ~@body]
+     (hp/include-js "/js/lib/jquery.js")
+     (hp/include-js "/js/lib/underscore.js")
+     (hp/include-js "/js/lib/bootstrap.js")
+     (hp/include-js "/js/global.js")]))
 
 (defn jumbo [req]
   (row 12 [:div.jumbotron
@@ -71,12 +70,18 @@
          [:a {:href "logout"} "Logout"]])
       "Anonymous user")]])
 
+(defn profile [p]
+  [:div.panel.panel-default
+   [:div.panel-heading [:h4 (:username p)]]
+   [:div.panel-body
+    [:img.img-thumbnail {:src (:avatar_url p)}]]])
+
 (defn index-page  [r] (base-page r (jumbo r)))
-(defn status-page [r] (base-page r (misc "status")))
-(defn tracks-page [r] (base-page r (misc "tracks")))
-(defn login-page  [r] (base-page r (concat (misc "login") [(row 6 (login-form r))])))
+(defn main-page   [r p] (base-page r (jumbo r) (row 12 (profile p)) (row 12 (whois r))))
+(defn login-page  [r] (base-page r (misc "login") (row 6 (login-form r)) (row 12 (whois r))))
 
 (defn row [n body]
   [:div.row
    [(keyword (str "div.col-lg-" n))
     body]])
+
