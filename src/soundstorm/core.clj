@@ -21,10 +21,7 @@
   (if-let [token (:current (friend/identity req))]
     (let [{me :me tracks :tracks}
           (sc/get-resources [:me :tracks] token)]
-      (log/info "identity:" token)
-      (log/info "me:" me)
-      (log/info "tracks:" tracks)
-      (view/main-page req me))
+      (view/main-page req me tracks))
     (view/index-page req)))
 
 ;; soundcloud oauth2 config

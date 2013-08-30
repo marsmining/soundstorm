@@ -70,18 +70,30 @@
          [:a {:href "logout"} "Logout"]])
       "Anonymous user")]])
 
-(defn profile [p]
+(defn track [{:keys [title waveform_url permalink_url playback_count]}]
+  [:li.list-group-item.ss-waveform
+   {:style (str "background-image: url('" waveform_url "');")}
+   [:a {:href permalink_url} title]
+   [:span.badge playback_count]])
+
+(defn profile [p t]
   [:div.panel.panel-default
    [:div.panel-heading [:h4 (:username p)]]
    [:div.panel-body
-    [:img.img-thumbnail {:src (:avatar_url p)}]]])
+    (col 2 [:img.img-thumbnail {:src (:avatar_url p)}])
+    (col 6 [:ul.list-group
+            (map track t)])]])
 
 (defn index-page  [r] (base-page r (jumbo r)))
-(defn main-page   [r p] (base-page r (jumbo r) (row 12 (profile p)) (row 12 (whois r))))
-(defn login-page  [r] (base-page r (misc "login") (row 6 (login-form r)) (row 12 (whois r))))
+(defn main-page   [r p t] (base-page r (jumbo r) (row (profile p t)) (row (whois r))))
+(defn login-page  [r] (base-page r (misc "login") (row 6 (login-form r)) (row (whois r))))
 
-(defn row [n body]
-  [:div.row
-   [(keyword (str "div.col-lg-" n))
-    body]])
+(defn row
+  ([body] (row 12 body))
+  ([n body]
+     [:div.row
+      (col n body)]))
 
+(defn col [n body]
+  [(keyword (str "div.col-lg-" n))
+   body])

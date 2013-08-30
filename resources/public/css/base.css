@@ -12,3 +12,9 @@
 .ss-sub {
     vertical-align: text-top;
 }
+
+.ss-waveform {
+    background-color: #B3E0F2;
+    background-clip: border-box;
+    background-size: cover;
+}
