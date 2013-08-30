@@ -64,7 +64,6 @@
 
 (defroutes main-routes
   (GET "/" req (home req))
-  (GET "/login" req (view/login-page req))
   (friend/logout (ANY "/logout" req (ring.util.response/redirect "/")))
   (route/resources "/")
   (route/not-found "Page not found"))
@@ -96,12 +95,10 @@
         {:allow-anon? true
          :login-uri "/login"
          :default-landing-uri "/"
-         :credential-fn (partial creds/bcrypt-credential-fn user/fetch)
          :workflows [(oauth2/workflow
                       {:client-config client-config
                        :uri-config uri-config
                        :access-token-parsefn access-token-parsefn
-                       :config-auth config-auth})
-                     (workflows/interactive-form)]}))
+                       :config-auth config-auth})]}))
       (wrap-base-url)
       (log-requests)))
