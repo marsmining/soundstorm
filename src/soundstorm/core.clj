@@ -1,6 +1,5 @@
 (ns soundstorm.core
   (:require [soundstorm.view :as view]
-            [soundstorm.user :as user]
             [soundstorm.config :as config]
             [soundstorm.soundcloud :as sc]
             [clojure.tools.logging :as log]
