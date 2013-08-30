@@ -1,6 +1,7 @@
 (ns soundstorm.core
   (:require [soundstorm.view :as view]
             [soundstorm.user :as user]
+            [soundstorm.config :as config]
             [soundstorm.soundcloud :as sc]
             [clojure.tools.logging :as log]
             [compojure.handler :as handler]
@@ -38,11 +39,7 @@
 
 (def config-auth {:roles #{::user/user}})
 
-(def client-config
-  {:client-id "b35a89f510267e48d1ec0169e4d7686e"
-   :client-secret "5b53d5bdcd9be8b0ccb304e23e070f3d"
-   :callback {:domain "http://localhost.com:3000"
-              :path "/sc-redirect-uri"}})
+(def client-config (config/fetch :client-config))
 
 (def uri-config
   {:authentication-uri {:url "https://soundcloud.com/connect"
@@ -81,11 +78,11 @@
     (if (is-media? (:uri req))
       (handler req)
       (do
-       (log/info (:request-method req) (:uri req) (:query-string req))
-       (let [start (System/currentTimeMillis)
-             rez (handler req)]
-         (log/info {:uri (:uri req) :elapsed (- (System/currentTimeMillis) start)})
-         rez)))))
+        (log/info (:request-method req) (:uri req) (:query-string req))
+        (let [start (System/currentTimeMillis)
+              rez (handler req)]
+          (log/info {:uri (:uri req) :elapsed (- (System/currentTimeMillis) start)})
+          rez)))))
 
 (def secured-app
   (-> (handler/site

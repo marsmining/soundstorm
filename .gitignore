@@ -3,6 +3,7 @@
 /classes
 /checkouts
 /logs
+/config
 pom.xml
 pom.xml.asc
 *.jar

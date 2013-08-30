@@ -29,4 +29,6 @@
                  [hiccup "1.0.4"]
                  [com.taoensso/carmine "2.2.0"]]
   :plugins [[lein-ring "0.7.1"]]
-  :ring {:handler soundstorm.core/secured-app})
+  :ring {:handler soundstorm.core/secured-app}
+  :profiles {:dev {:resource-paths ["config/dev"]}
+             :prod {:resource-paths ["config/prod"]}})
