@@ -19,10 +19,7 @@
     [:body
      [:div.container
       ~@body]
-     (hp/include-js "/js/lib/jquery.js")
-     (hp/include-js "/js/lib/underscore.js")
-     (hp/include-js "/js/lib/bootstrap.js")
-     (hp/include-js "/js/global.js")]))
+     (hp/include-js "/js/app.js")]))
 
 (defn jumbo [req]
   (row 12 [:div.jumbotron

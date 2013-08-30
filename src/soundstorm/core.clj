@@ -8,7 +8,6 @@
             [compojure.core :refer [GET ANY defroutes]]
             [hiccup.middleware :refer [wrap-base-url]]
             [cemerick.friend :as friend]
-            [cemerick.friend.workflows :as workflows]
             [cemerick.friend.credentials :as creds]
             [friend-oauth2.workflow :as oauth2]
             [cheshire.core :as json]
