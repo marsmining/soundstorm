@@ -4,7 +4,7 @@ Simple [ring](https://github.com/ring-clojure) app which uses the [SoundCloud AP
 
 Demo of the app is here: http://ss.ockhamsolutions.de/
 
-_note: there app uses no persistence, so nothing is saved or even cached_
+_note: the app uses no persistence, so nothing is saved or even cached_
 
 ## Configuration
 
