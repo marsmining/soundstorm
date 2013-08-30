@@ -6,7 +6,7 @@ Demo of the app is here: http://ss.ockhamsolutions.de/
 
 _note: the app uses no persistence, so nothing is saved or even cached_
 
-## Configuration
+### Configuration
 
 To run the app, you must have a directory `config` in the project root directory. In this directory, there must also be a `dev` and `prod` directory. These directories correspond to the profiles in `project.clj`. The namespace `config` looks for a file named `ss.edn` which is looked up as a classpath resource. The contents of `ss.edn` looks like:
 
