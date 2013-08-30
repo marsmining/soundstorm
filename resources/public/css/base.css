@@ -18,3 +18,9 @@
     background-clip: border-box;
     background-size: cover;
 }
+
+body {
+    background: url('/img/soundstorm-logo-500x500.png') repeat 0 50%;
+    background-size: contain;
+    background-origin: content-box;
+}

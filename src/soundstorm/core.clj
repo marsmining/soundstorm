@@ -74,6 +74,7 @@
       (.endsWith str ".css")
       (.endsWith str ".ico")
       (.endsWith str ".png")
+      (.endsWith str ".jpg")
       (.endsWith str ".woff")
       (.endsWith str ".ttf")))
 
@@ -85,7 +86,7 @@
        (log/info (:request-method req) (:uri req) (:query-string req))
        (let [start (System/currentTimeMillis)
              rez (handler req)]
-         (log/info "elapsed time:" (- (System/currentTimeMillis) start))
+         (log/info {:uri (:uri req) :elapsed (- (System/currentTimeMillis) start)})
          rez)))))
 
 (def secured-app
