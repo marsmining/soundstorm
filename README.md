@@ -18,3 +18,10 @@ To run the app, you must have a directory `config` in the project root directory
 ```
 
 The above is my development config. I have `localhost.com` set to resolve to localhost on my development machine. This allows you to test the oauth process locally.
+
+### License
+
+Copyright © 2013 FIXME
+
+Distributed under the Eclipse Public License either version 1.0 or (at
+your option) any later version.
