@@ -5,8 +5,7 @@
    [hiccup.form :as hf]
    [cemerick.friend :as friend]))
 
-(declare whois)
-(declare row)
+(declare row col whois)
 
 (defmacro base-page [req & body]
   `(hp/html5
