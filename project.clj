@@ -26,8 +26,7 @@
                  [clj-http "0.7.6"]
                  [cheshire "5.2.0"]
                  [compojure "1.1.5"]
-                 [hiccup "1.0.4"]
-                 [com.taoensso/carmine "2.2.0"]]
+                 [hiccup "1.0.4"]]
   :plugins [[lein-ring "0.7.1"]]
   :ring {:handler soundstorm.core/secured-app}
   :profiles {:dev {:resource-paths ["config/dev"]}
