@@ -1,6 +1,10 @@
 # soundstorm
 
-Simple [ring](https://github.com/ring-clojure) app which uses the SoundCloud API. Mostly covers the basic boilerplate of a typical clojure webapp.
+Simple [ring](https://github.com/ring-clojure) app which uses the SoundCloud API. Mostly covers the basic boilerplate of a typical clojure webapp. Currently you can login to the app via SoundCloud and view your tracks.
+
+Demo of the app is here: http://ss.ockhamsolutions.de/
+
+__note: There is no persistence in the app, so nothing is saved or even cached.__
 
 ## Configuration
 
