@@ -19,7 +19,7 @@
 (defn home [req]
   (if-let [token (:current (friend/identity req))]
     (let [{me :me tracks :tracks}
-          (sc/get-resources [:me :tracks] token)]
+          (sc/get-resources [:me :tracks] {:oauth-token token})]
       (view/main-page req me tracks))
     (view/index-page req)))
 
