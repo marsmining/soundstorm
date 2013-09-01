@@ -1,6 +1,8 @@
 # soundstorm
 
-Simple [ring](https://github.com/ring-clojure) app which uses the [SoundCloud API](http://developers.soundcloud.com/docs/api/reference). Mostly covers the basic boilerplate of a typical clojure o-auth2 webapp. Currently you can login to the app via SoundCloud and view your tracks. Apart from a few lines of json fetching, mostly just a copy-paste job from [cemerick/friend](https://github.com/cemerick/friend) and [ddellacosta/friend-oauth2](https://github.com/ddellacosta/friend-oauth2) libraries examples.
+_just a random hack in progress_
+
+Simple [ring](https://github.com/ring-clojure) app which uses the [SoundCloud API](http://developers.soundcloud.com/docs/api/reference). Mostly covers the basic boilerplate of a typical clojure webapp. Currently you can login to the app via SoundCloud and view your tracks. Apart from a few lines of json fetching, mostly just a copy-paste job from [cemerick/friend](https://github.com/cemerick/friend) and [ddellacosta/friend-oauth2](https://github.com/ddellacosta/friend-oauth2) libraries examples.
 
 Demo of the app is here: http://ss.ockhamsolutions.de/
 
