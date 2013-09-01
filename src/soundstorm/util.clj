@@ -1,5 +1,4 @@
-(ns soundstorm.util
-  (:require [clojure.algo.monads :refer :all]))
+(ns soundstorm.util)
 
 (defn update-values
   "'Updates' every value in map"
